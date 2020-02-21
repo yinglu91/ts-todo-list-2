@@ -9,10 +9,10 @@ const initialTodos: Todo[] = [
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
 
-  const addTodoHandler = (text: string) => {
+  const addTodoHandler = (todoText: string) => {
     setTodos(prevTodos => [
       ...prevTodos,
-      { id: Math.random().toString(), text, complete: false }
+      { id: Math.random().toString(), text: todoText, complete: false }
     ]);
   };
 
@@ -31,7 +31,7 @@ const App: React.FC = () => {
     setTodos(newTodos);
   }
 
-  const deleteTodoHandler = (todoId: string) => {
+  const deleteTodoHandler: DeleteTodo = todoId => {
     setTodos(prevTodos => {
       return prevTodos.filter(todo => todo.id !== todoId);
     });
@@ -39,10 +39,12 @@ const App: React.FC = () => {
 
   return (
     <div className='App'>
-      <NewTodo onAddTodo={addTodoHandler} />
-      <TodoList items={todos} onDeleteTodo={deleteTodoHandler} toggleTodo={toggleTodo}/>
+      <NewTodo addTodo={addTodoHandler} />
+      <TodoList items={todos} deleteTodo={deleteTodoHandler} toggleTodo={toggleTodo}/>
     </div>
   );
 };
 
 export default App;
+
+// https://www.youtube.com/watch?v=a0xwxpr4zSo

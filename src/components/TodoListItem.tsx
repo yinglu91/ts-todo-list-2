@@ -3,22 +3,21 @@ import './TodoList.css';
 
 interface TodoListItemProps {
   todo: Todo;
-  onDeleteTodo: (id: string) => void;
+  deleteTodo: DeleteTodo;
   toggleTodo: ToggleTodo;
 }
 
-const TodoListItem: React.FC<TodoListItemProps> = ({todo, onDeleteTodo, toggleTodo}) => {
+const TodoListItem: React.FC<TodoListItemProps> = ({todo, deleteTodo, toggleTodo}) => {
   return  (
     <li key={todo.id}>
+      <input type="checkbox" checked={todo.complete} onChange={() => toggleTodo(todo) }/>
       <label className={todo.complete? "complete": undefined} >
-        <input type="checkbox" checked={todo.complete} onChange={() => toggleTodo(todo) }/>
         {todo.text}
       </label>
     
-      <button onClick={() => onDeleteTodo(todo.id)}>DELETE</button> 
+      <button onClick={() => deleteTodo(todo.id)}>DELETE</button> 
     </li>
     );
-
 }
 
 export default TodoListItem;

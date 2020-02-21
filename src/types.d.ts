@@ -4,5 +4,8 @@ type Todo = {
   complete: boolean;
 }
 
+type AddTodo = (todoText: string) => void;
 type ToggleTodo = (selectedTodo: Todo) => void;
+type DeleteTodo = (todoId: string) => void;
+
 // no export!!! and no import needed inside the project
